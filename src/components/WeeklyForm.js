@@ -13,13 +13,10 @@ const StyledPaper = styled(Paper)`
     width: 100%;
   }
 
-  .todo {
+  .numberInputFeild {
     display: flex;
 
-    .number-feild {
-      margin: 0;
-    }
-    .first {
+    .first-number-feild {
       margin-right: 24px;
     }
   }
@@ -33,18 +30,17 @@ const StyledPaper = styled(Paper)`
 const WeeklyForm = ({ className }) => {
   const [formData, setFormData] = useState({});
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formData);
+  };
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name.toLocaleLowerCase().split(" ").join("-")]: event.target
         .value,
     });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formData);
-    // Make a request for a user with a given ID
   };
 
   return (
@@ -75,9 +71,9 @@ const WeeklyForm = ({ className }) => {
           multiline
           rows={3}
         />
-        <div className="todo">
+        <div className="numberInputFeild">
           <TextField
-            className="first number-feild"
+            className="first-number-feild"
             onChange={(e) => handleChange(e)}
             id="standard-number"
             variant="outlined"
@@ -89,7 +85,6 @@ const WeeklyForm = ({ className }) => {
             }}
           />
           <TextField
-            className="number-feild"
             onChange={(e) => handleChange(e)}
             id="standard-number"
             variant="outlined"
