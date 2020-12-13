@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
+
+import firebase from "../firebase";
+
+const db = firebase.ref("/form");
 
 const StyledPaper = styled(Paper)`
   display: flex;
@@ -30,9 +34,23 @@ const StyledPaper = styled(Paper)`
 const WeeklyForm = ({ className }) => {
   const [formData, setFormData] = useState({});
 
+  useEffect(() => {
+    db.on(
+      "value",
+      (snapshot) => {
+        console.log(Object.values(snapshot.val()))
+      },
+      (errorObject) => {
+        console.log("The read failed: " + errorObject.code);
+      }
+    );
+  });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    db.push(formData)
+      .then(() => console.log("shit was submitted yo"))
+      .catch(() => console.log("shit did not work yo"));
   };
 
   const handleChange = (event) => {
