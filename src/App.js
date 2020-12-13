@@ -1,9 +1,9 @@
-import WeeklyForm from "./components/WeeklyForm";
+import Layout from "./components/Layout";
 
 const App = () => {
   return (
     <div className="App">
-      <WeeklyForm />
+      <Layout />
     </div>
   );
 };
