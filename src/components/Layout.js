@@ -2,6 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
 
 import WeeklyForm from "./WeeklyForm";
+import Feed from "./Feed";
 
 const StyledLayout = styled.div`
   display: grid;
@@ -44,15 +45,12 @@ const Layout = () => {
         <h3>1. Increase hourly rate to 125 by the age of 30</h3>
         <h3>2. Enhance soft skill set</h3>
         <h3>3. Increase technical skill set</h3>
-
       </Paper>
       <WeeklyForm className="Paper Weekly">Weekly form</WeeklyForm>
       <Paper elevation={3} className="Paper Monthly">
         Score
       </Paper>
-      <Paper elevation={3} className="Paper Feed">
-        feed
-      </Paper>
+      <Feed elevation={3} className="Paper Feed" />
     </StyledLayout>
   );
 };

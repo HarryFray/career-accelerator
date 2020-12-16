@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
 
-import firebase from "../firebase";
-
-const db = firebase.ref("/form");
+import useFirebaseMethods from "../hooks/useFirebaseMethods";
 
 const StyledPaper = styled(Paper)`
   display: flex;
@@ -32,30 +30,13 @@ const StyledPaper = styled(Paper)`
 `;
 
 const WeeklyForm = ({ className }) => {
-  const [formData, setFormData] = useState({});
+  const [review, setReview] = useState({});
 
-  useEffect(() => {
-    db.on(
-      "value",
-      (snapshot) => {
-        console.log(Object.values(snapshot.val()))
-      },
-      (errorObject) => {
-        console.log("The read failed: " + errorObject.code);
-      }
-    );
-  });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    db.push(formData)
-      .then(() => console.log("shit was submitted yo"))
-      .catch(() => console.log("shit did not work yo"));
-  };
+  const { submitReview } = useFirebaseMethods(review);
 
   const handleChange = (event) => {
-    setFormData({
-      ...formData,
+    setReview({
+      ...review,
       [event.target.name.toLocaleLowerCase().split(" ").join("-")]: event.target
         .value,
     });
@@ -64,7 +45,7 @@ const WeeklyForm = ({ className }) => {
   return (
     <StyledPaper elevation={3} className={className}>
       <h2>Weeky Performance Form Available</h2>
-      <form onSubmit={(e) => handleSubmit(e)} noValidate autoComplete="off">
+      <form onSubmit={(e) => submitReview(e)} noValidate autoComplete="off">
         <TextField
           onChange={(e) => handleChange(e)}
           label="In what ways did I excel"
