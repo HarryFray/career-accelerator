@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
 
 import useFirebaseMethods from "../hooks/useFirebaseMethods";
+import useDate from "../hooks/useDate";
 
 const StyledPaper = styled(Paper)`
   display: flex;
@@ -30,13 +31,14 @@ const StyledPaper = styled(Paper)`
 `;
 
 const WeeklyForm = ({ className }) => {
-  const [review, setReview] = useState({});
+  const [queAnsPairs, setQueAnsPairs] = useState({});
 
-  const { submitReview } = useFirebaseMethods(review);
+  const { completeDate, submitAllowed } = useDate();
+  const { submitReview } = useFirebaseMethods({ queAnsPairs, completeDate });
 
   const handleChange = (event) => {
-    setReview({
-      ...review,
+    setQueAnsPairs({
+      ...queAnsPairs,
       [event.target.name.toLocaleLowerCase().split(" ").join("-")]: event.target
         .value,
     });
