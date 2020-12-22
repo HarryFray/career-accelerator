@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
 
@@ -7,17 +7,31 @@ import useFirebaseMethods from "../hooks/useFirebaseMethods";
 const StyledPaper = styled(Paper)`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-
-  .review {
-    background: green;
-    width: 100%;
-    margin: 8px;
-  }
+  height: calc(100vh - 70px);
+  overflow: scroll;
 
   .questionsAnsPair {
     margin: 8px;
-    background: #bada55;
+  }
+
+  .review {
+    transition: 0.3s;
+    width: calc(100% - 8px);
+    margin: 8px;
+    padding: 8px;
+  }
+
+  .review:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .question {
+    margin: 20px 0 0;
+  }
+
+  .answer {
+    margin: 8px 0 0;
+    font-weight: normal;
   }
 `;
 
@@ -26,21 +40,23 @@ const Feed = ({ className }) => {
 
   return (
     <StyledPaper elevation={3} className={className}>
-      {allReviews.map((review, e) => {
+      {allReviews.map(({ completeDate, queAnsPairs }) => {
         return (
-          <div className="review">
-            {Object.entries(review).map((pair) => {
+          <Paper key={completeDate} className="review">
+            <h3>{completeDate}</h3>
+            {Object.entries(queAnsPairs).map((pair) => {
+              console.log("pair: ", pair);
               let que = pair[0];
               let ans = pair[1];
 
               return (
-                <div className="questionsAnsPair">
-                  <div>{"Q: " + que}</div>
-                  <div>{"A: " + ans}</div>
+                <div className="questionsAnsPair" key={ans}>
+                  <h4 className="question">{que.split("-").join(" ")}</h4>
+                  <h4 className='answer'>{ans}</h4>
                 </div>
               );
             })}
-          </div>
+          </Paper>
         );
       })}
     </StyledPaper>
