@@ -18,7 +18,7 @@ const useDate = () => {
   let completeDate = `${weekDay} ${month} ${numDay}, ${year}`;
 
   const submitAllowed =
-    !allDates.includes(completeDate) && weekDay === "Friday";
+    !allDates.includes(completeDate);
 
   return { weekDay, numDay, month, year, completeDate, submitAllowed };
 };

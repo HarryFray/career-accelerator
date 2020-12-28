@@ -11,7 +11,9 @@ const useFirebaseMethods = (review) => {
     db.on(
       "value",
       (snapshot) => {
-        setAllReviews(Object.values(snapshot.val()));
+        if (snapshot.val()) {
+          setAllReviews(Object.values(snapshot.val()));
+        }
       },
       (errorObject) => {
         setAllReviews([{ error: errorObject.code }]);

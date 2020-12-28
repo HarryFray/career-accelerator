@@ -46,9 +46,14 @@ const WeeklyForm = ({ className }) => {
 
   return (
     <StyledPaper elevation={3} className={className}>
-      <h2>Weeky Performance Form Available</h2>
+      {submitAllowed ? (
+        <h2>Weeky Performance Form Available</h2>
+      ) : (
+        <h2>Weeky Performance Form Not Available</h2>
+      )}
       <form onSubmit={(e) => submitReview(e)} noValidate autoComplete="off">
         <TextField
+          disabled={!submitAllowed}
           onChange={(e) => handleChange(e)}
           label="In what ways did I excel"
           name="In what ways did I excel"
@@ -57,6 +62,7 @@ const WeeklyForm = ({ className }) => {
           rows={3}
         />
         <TextField
+          disabled={!submitAllowed}
           onChange={(e) => handleChange(e)}
           label="What were my week points"
           name="What were my week points"
@@ -65,6 +71,7 @@ const WeeklyForm = ({ className }) => {
           rows={3}
         />
         <TextField
+          disabled={!submitAllowed}
           onChange={(e) => handleChange(e)}
           label="Cray brainstorm improvement idea"
           name="Cray brainstorm improvement idea"
@@ -74,6 +81,7 @@ const WeeklyForm = ({ className }) => {
         />
         <div className="numberInputFeild">
           <TextField
+            disabled={!submitAllowed}
             className="first-number-feild"
             onChange={(e) => handleChange(e)}
             id="standard-number"
@@ -86,6 +94,7 @@ const WeeklyForm = ({ className }) => {
             }}
           />
           <TextField
+            disabled={!submitAllowed}
             onChange={(e) => handleChange(e)}
             id="standard-number"
             variant="outlined"
@@ -98,6 +107,7 @@ const WeeklyForm = ({ className }) => {
           />
         </div>
         <TextField
+          disabled={!submitAllowed}
           onChange={(e) => handleChange(e)}
           label="General thoughts"
           name="General thoughts"
@@ -106,7 +116,12 @@ const WeeklyForm = ({ className }) => {
           rows={3}
         />
         <div className="buttons">
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            disabled={!submitAllowed}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
             Submit
           </Button>
         </div>

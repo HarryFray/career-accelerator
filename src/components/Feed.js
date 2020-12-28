@@ -25,12 +25,16 @@ const StyledPaper = styled(Paper)`
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
+  .date {
+    margin: 12px 0 0;
+  }
+
   .question {
-    margin: 20px 0 0;
+    margin: 8px 0 0;
   }
 
   .answer {
-    margin: 8px 0 0;
+    margin: 4px 0 0;
     font-weight: normal;
   }
 `;
@@ -43,7 +47,7 @@ const Feed = ({ className }) => {
       {allReviews.map(({ completeDate, queAnsPairs }) => {
         return (
           <Paper key={completeDate} className="review">
-            <h3>{completeDate}</h3>
+            <h3 className='date'>{completeDate}</h3>
             {Object.entries(queAnsPairs).map((pair) => {
               console.log("pair: ", pair);
               let que = pair[0];
@@ -51,8 +55,8 @@ const Feed = ({ className }) => {
 
               return (
                 <div className="questionsAnsPair" key={ans}>
-                  <h4 className="question">{que.split("-").join(" ")}</h4>
-                  <h4 className='answer'>{ans}</h4>
+                  <h5 className="question">{que.split("-").join(" ")}</h5>
+                  <h5 className='answer'>{ans}</h5>
                 </div>
               );
             })}
