@@ -1,9 +1,9 @@
 import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
 
 import WeeklyForm from "./WeeklyForm";
 import Feed from "./Feed";
+import Action from "./Action";
 import DayTimePicker from "./DayTimePicker";
 
 const StyledLayout = styled.div`
@@ -70,9 +70,6 @@ const Layout = () => {
 
   return (
     <StyledLayout>
-      <Button onClick={submitRequest} variant="contained" color="primary">
-        Submit
-      </Button>
       <Paper elevation={3} className="Paper Goals">
         Goals
         <h3>1. Increase hourly rate to 125 by the age of 30</h3>
@@ -81,9 +78,7 @@ const Layout = () => {
       </Paper>
       <DayTimePicker elevation={3} className="Paper day_time_picker" />
       <WeeklyForm className="Paper Weekly">Weekly form</WeeklyForm>
-      <Paper elevation={3} className="Paper score">
-        Score
-      </Paper>
+      <Action />
       <Feed elevation={3} className="Paper Feed" />
     </StyledLayout>
   );
